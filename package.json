@@ -1,0 +1,16 @@
+{
+    "name": "moomilk-backend",
+    "version": "0.0.0",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "dependencies": {
+        "@hapi/joi": "^17.1.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "expressjs/express",
+        "mongoose": "^5.9.2",
+        "nodemon": "2.0.2"
+    }
+}
