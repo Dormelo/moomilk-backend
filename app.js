@@ -1,17 +1,20 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const app = express();
 const cors = require('cors');
 const cowsRoute = require('./routes/cows.js');
+const milkingRoute = require('./routes/milking.js');
 require('dotenv/config');
 
+const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('Bienvenue sur l\'API Moomilk'));
+app.get('/', (req, res) => res.send('Bienvenue sur l API Moomilk'));
 
 app.use('/api/cows', cowsRoute);
+
+app.use('/api/milking', milkingRoute);
 
 mongoose.connect(
     process.env.DB_CONNECTION, 
