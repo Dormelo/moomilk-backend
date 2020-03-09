@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth.js');
 const Cow = require('../models/Cow.js');
 
-router.delete('/:travailId', async (req, res) => {
+
+router.delete('/:travailId', auth, async (req, res) => {
     try {
         const cowRemoved = await Cow.deleteOne({travailId: req.params.travailId})
         res.json(cowRemoved);
@@ -11,7 +13,7 @@ router.delete('/:travailId', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         const cows = await Cow.find();
         res.json(cows);
@@ -20,7 +22,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:travailId', async (req, res) => {
+router.get('/:travailId', auth, async (req, res) => {
     try {
         const cow = await Cow.find({travailId: req.params.travailId});
         if (!cow) return res.status(404).send('Cows not found.');
@@ -30,7 +32,7 @@ router.get('/:travailId', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
     try {
         const cow = new Cow({
@@ -51,7 +53,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:travailId', async (req, res) => {
+router.put('/:travailId', auth, async (req, res) => {
     try {
         const cowUpdated = await Cow.updateOne(
             {travailId: req.params.travailId},
